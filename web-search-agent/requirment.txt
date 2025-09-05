@@ -1,9 +1,0 @@
-duckduckgo-search
-fastapi[standard]
-groq
-packaging
-phi
-sqlalchemy
-uvicorn
-yfinance
-streamlit
