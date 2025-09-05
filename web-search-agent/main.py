@@ -3,9 +3,11 @@ from phi.agent import Agent
 from phi.model.groq import Groq
 from phi.tools.duckduckgo import DuckDuckGo
 from dotenv import load_dotenv
+import os
 
 
 load_dotenv()
+groq_api_key = os.getenv("GROQ_API_KEY")
 
 # main agent, used Groq API key
 web_scrape_agent = Agent(
@@ -30,7 +32,7 @@ web_scrape_agent = Agent(
 # streamlit defaults UI
 st.set_page_config(page_title="Web Scrape Agent", layout="centered")
 st.title("Web Scrape Agent")
-st.caption("Ask me anything, I'll search the web and give you a clear answer!")
+st.caption("Ask me anything, I'll search the web and give you a clear answer! *Developed By Sheryar*")
 
 # stores history(kabhi kabhi, karta hai, will fix it)
 if "history" not in st.session_state:

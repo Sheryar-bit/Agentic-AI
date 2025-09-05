@@ -2,7 +2,8 @@ duckduckgo-search
 fastapi[standard]
 groq
 packaging
-phidata
+phi
 sqlalchemy
 uvicorn
 yfinance
+streamlit
