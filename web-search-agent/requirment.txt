@@ -1,0 +1,8 @@
+duckduckgo-search
+fastapi[standard]
+groq
+packaging
+phidata
+sqlalchemy
+uvicorn
+yfinance
