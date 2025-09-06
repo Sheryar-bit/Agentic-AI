@@ -1,4 +1,6 @@
 duckduckgo-search
 groq
 phi
+agno
+ddgs
 streamlit

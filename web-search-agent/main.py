@@ -1,7 +1,7 @@
 import streamlit as st
-from phi.agent import Agent
-from phi.model.groq import Groq
-from phi.tools.duckduckgo import DuckDuckGo
+from agno.agent import Agent
+from agno.models.groq import Groq
+from agno.tools.duckduckgo import DuckDuckGoTools
 from dotenv import load_dotenv
 import os
 
@@ -14,7 +14,7 @@ web_scrape_agent = Agent(
     name="Web Searching Agent",
     description="An agent that searches any query over the web.",
     model=Groq(id="llama-3.3-70b-versatile"),
-    tools=[DuckDuckGo()],
+    tools=[DuckDuckGoTools()],
     instructions="""
     ## Instructions
     - Answer clearly and concisely in markdown format. 
@@ -48,14 +48,16 @@ if user_input:
     with st.chat_message("assistant"):
         placeholder = st.empty()
         collected_text = ""
-
+        #
+        # for chunk in web_scrape_agent.run(user_input, stream=True):
+        #     if hasattr(chunk,"content"):
+        #         collected_text+=chunk.content
+        #     else:
+        #         collected_text+= str(chunk)
+        #     placeholder.markdown(collected_text, unsafe_allow_html=True)
         for chunk in web_scrape_agent.run(user_input, stream=True):
-            if hasattr(chunk,"content"):
-                collected_text+=chunk.content
-            else:
-                collected_text+= str(chunk)
+            collected_text += str(getattr(chunk, "content", "") or "")
             placeholder.markdown(collected_text, unsafe_allow_html=True)
-
 
         st.session_state["history"].append({"role": "agent", "content": collected_text})
 
